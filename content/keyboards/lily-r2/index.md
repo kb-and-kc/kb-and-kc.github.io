@@ -5,7 +5,6 @@ description: "Gok Lily R2."
 boards: ["Lily R2"]
 makers: ["TypePlus"]
 designers: ["Gok"]
-form_factor: "60%"
 tags: ["60-percent", "hhkb", "grey", "beige", "white"]
 status: "Owned"
 acquired: "2026"
