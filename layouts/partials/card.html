@@ -1,0 +1,18 @@
+{{ $cover := partial "cover-resource.html" . }}
+<article class="card filter-item">
+  <a class="card-link" href="{{ .RelPermalink }}">
+    <div class="card-media">
+      {{ with $cover }}
+        <img src="{{ .RelPermalink }}" alt="Cover photo for {{ $.Title }}" loading="lazy">
+      {{ else }}
+        <div class="placeholder-cover">No photo</div>
+      {{ end }}
+    </div>
+    <div class="card-body">
+      <p class="card-kicker">{{ humanize .Section }}</p>
+      <h2>{{ .Title }}</h2>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+      {{ partial "chips-compact.html" . }}
+    </div>
+  </a>
+</article>

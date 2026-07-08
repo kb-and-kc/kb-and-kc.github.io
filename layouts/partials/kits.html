@@ -1,0 +1,36 @@
+{{ with .Params.kits }}
+<section class="section-block">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Inventory</p>
+      <h2>Kit ownership</h2>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table class="config-table kit-table">
+      <thead>
+        <tr>
+          <th>Kit</th>
+          <th>Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range . }}
+          <tr>
+            {{ if reflect.IsMap . }}
+              <td>{{ partial "inline-value.html" (index . "name") }}</td>
+              <td>{{ with (index . "status") }}{{ partial "inline-value.html" . }}{{ else }}owned{{ end }}</td>
+              <td>{{ partial "inline-value.html" (index . "notes") }}</td>
+            {{ else }}
+              <td>{{ partial "inline-value.html" . }}</td>
+              <td>owned</td>
+              <td>—</td>
+            {{ end }}
+          </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </div>
+</section>
+{{ end }}

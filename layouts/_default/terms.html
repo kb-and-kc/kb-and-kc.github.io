@@ -1,0 +1,19 @@
+{{ define "main" }}
+<section class="page-head">
+  <p class="eyebrow">Browse</p>
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div class="intro">{{ . }}</div>{{ end }}
+</section>
+
+{{ partial "filter-toolbar.html" . }}
+<div class="term-grid" data-filter-list>
+  {{ range .Data.Terms.Alphabetical }}
+    <a class="term-card filter-item" href="{{ .Page.RelPermalink }}">
+      <span>{{ .Page.Title }}</span>
+      <em>{{ .Count }} {{ cond (eq .Count 1) "item" "items" }}</em>
+    </a>
+  {{ else }}
+    <p>No terms yet.</p>
+  {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,8 @@
+<div class="chip-row compact">
+  {{ range first 3 (.Params.boards | default (slice)) }}<span class="chip">{{ . }}</span>{{ end }}
+  {{ range first 3 (.Params.keycapsets | default (slice)) }}<span class="chip">{{ . }}</span>{{ end }}
+  {{ range first 2 (partial "param-list.html" (dict "page" . "keys" (slice "designers" "designer"))) }}<span class="chip">{{ . }}</span>{{ end }}
+  {{ range first 2 (partial "param-list.html" (dict "page" . "keys" (slice "form_factor" "form_factors" "layouts"))) }}<span class="chip">{{ . }}</span>{{ end }}
+  {{ range first 2 (partial "param-list.html" (dict "page" . "keys" (slice "layout_style" "layout_styles" "keyboard_layout" "case_layout" "blocker_layout"))) }}<span class="chip">{{ . }}</span>{{ end }}
+  {{ range first 4 (.Params.tags | default (slice)) }}<span class="chip muted">#{{ . }}</span>{{ end }}
+</div>

@@ -1,0 +1,28 @@
+{{- $label := .label -}}
+{{- $value := .value -}}
+{{- if $value -}}
+  {{- $items := slice -}}
+  {{- if reflect.IsSlice $value -}}
+    {{- range $value -}}
+      {{- if . -}}
+        {{- $items = $items | append . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $items = $items | append $value -}}
+  {{- end -}}
+  {{- if gt (len $items) 0 -}}
+    <div>
+      <dt>{{ $label }}</dt>
+      <dd>
+        {{- if gt (len $items) 1 -}}
+          <ul class="meta-list">
+            {{- range $items -}}<li>{{ . }}</li>{{- end -}}
+          </ul>
+        {{- else -}}
+          {{- index $items 0 -}}
+        {{- end -}}
+      </dd>
+    </div>
+  {{- end -}}
+{{- end -}}

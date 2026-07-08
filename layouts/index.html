@@ -1,0 +1,35 @@
+{{ define "main" }}
+<section class="home-hero">
+  <p class="eyebrow">Local keyboard and keycap photo catalogue</p>
+  <h1>{{ .Title }}</h1>
+  <div class="intro">{{ .Content }}</div>
+  <div class="hero-actions">
+    <a class="button" href="{{ "combinations/" | relURL }}">View combinations</a>
+    <a class="button button-secondary" href="{{ "browse/" | relURL }}">Browse by tags</a>
+  </div>
+</section>
+
+<section class="stats-grid" aria-label="Catalogue counts">
+  <a class="stat" href="{{ "combinations/" | relURL }}"><strong>{{ len (where site.RegularPages "Section" "combinations") }}</strong><span>Combinations</span></a>
+  <a class="stat" href="{{ "keyboards/" | relURL }}"><strong>{{ len (where site.RegularPages "Section" "keyboards") }}</strong><span>Keyboards</span></a>
+  <a class="stat" href="{{ "keycaps/" | relURL }}"><strong>{{ len (where site.RegularPages "Section" "keycaps") }}</strong><span>Keycap sets</span></a>
+  <a class="stat" href="{{ "tags/" | relURL }}"><strong>{{ len site.Taxonomies.tags }}</strong><span>Tags</span></a>
+</section>
+
+<section class="section-block">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Latest</p>
+      <h2>Recent combinations</h2>
+    </div>
+    <a href="{{ "combinations/" | relURL }}">See all</a>
+  </div>
+  <div class="card-grid">
+    {{ range first 6 (where site.RegularPages.ByDate.Reverse "Section" "combinations") }}
+      {{ partial "card.html" . }}
+    {{ else }}
+      <p>No combinations yet. Add one under <code>content/combinations/</code>.</p>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,74 @@
+<section class="meta-panel" aria-label="Item metadata">
+  {{ partial "meta-field.html" (dict "label" "Status" "value" .Params.status) }}
+  {{ partial "meta-field.html" (dict "label" "Acquired" "value" .Params.acquired) }}
+  {{ partial "meta-field.html" (dict "label" "Form factor" "value" (or .Params.form_factor .Params.form_factors .Params.layouts)) }}
+  {{ partial "meta-field.html" (dict "label" "Layout style" "value" (or .Params.layout_style .Params.layout_styles .Params.keyboard_layout .Params.case_layout .Params.blocker_layout .Params.physical_layout .Params.layout)) }}
+  {{ partial "meta-field.html" (dict "label" "Colour" "value" (or .Params.colour .Params.color)) }}
+  {{ partial "meta-field.html" (dict "label" "Finish" "value" (or .Params.finish .Params.case_finish .Params.surface_finish)) }}
+  {{ partial "meta-field.html" (dict "label" "Case" "value" .Params.case) }}
+  {{ partial "meta-field.html" (dict "label" "Plate" "value" .Params.plate) }}
+  {{ partial "meta-field.html" (dict "label" "PCB" "value" .Params.pcb) }}
+  {{ partial "meta-field.html" (dict "label" "Featured Decoration" "value" (or .Params.featured_decoration .Params.featured_decorations)) }}
+  {{ partial "meta-field.html" (dict "label" "Material" "value" .Params.material) }}
+  {{ partial "meta-field.html" (dict "label" "Designer" "value" (or .Params.designers .Params.designer)) }}
+  {{ partial "meta-field.html" (dict "label" "Group buy date" "value" .Params.group_buy_date) }}
+  {{ partial "meta-field.html" (dict "label" "Delivery date" "value" .Params.delivery_date) }}
+  {{ partial "meta-field.html" (dict "label" "Rating" "value" .Params.rating) }}
+  {{ partial "meta-field.html" (dict "label" "Lighting" "value" .Params.lighting) }}
+  {{ partial "meta-field.html" (dict "label" "Use case" "value" .Params.use_case) }}
+</section>
+
+{{ with .Params.copies }}
+<section class="section-block">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Inventory</p>
+      <h2>Copies and configurations</h2>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table class="config-table copies-table">
+      <thead>
+        <tr>
+          <th>Copy</th>
+          <th>Acquired</th>
+          <th>Form factor</th>
+          <th>Layout style</th>
+          <th>Colour</th>
+          <th>Finish</th>
+          <th>Case</th>
+          <th>Plate</th>
+          <th>PCB</th>
+          <th>Featured Decoration</th>
+          <th>Switches</th>
+          <th>Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ $page := $ }}
+        {{ range $index, $copy := . }}
+          <tr>
+            <td>{{ with (index $copy "name") }}{{ . }}{{ else }}Copy {{ add $index 1 }}{{ end }}</td>
+            <td>{{ partial "copy-value.html" (dict "page" $page "copy" $copy "keys" (slice "acquired")) }}</td>
+            <td>{{ partial "copy-value.html" (dict "page" $page "copy" $copy "keys" (slice "form_factor" "form_factors" "size_class" "size" "layouts")) }}</td>
+            <td>{{ partial "copy-value.html" (dict "page" $page "copy" $copy "keys" (slice "layout_style" "layout_styles" "keyboard_layout" "case_layout" "blocker_layout" "physical_layout" "layout")) }}</td>
+            <td>{{ partial "copy-value.html" (dict "page" $page "copy" $copy "keys" (slice "colour" "color")) }}</td>
+            <td>{{ partial "copy-value.html" (dict "page" $page "copy" $copy "keys" (slice "finish" "case_finish" "surface_finish")) }}</td>
+            <td>{{ partial "copy-value.html" (dict "page" $page "copy" $copy "keys" (slice "case")) }}</td>
+            <td>{{ partial "copy-value.html" (dict "page" $page "copy" $copy "keys" (slice "plate")) }}</td>
+            <td>{{ partial "copy-value.html" (dict "page" $page "copy" $copy "keys" (slice "pcb")) }}</td>
+            <td>{{ partial "copy-value.html" (dict "page" $page "copy" $copy "keys" (slice "featured_decoration" "featured_decorations")) }}</td>
+            <td>{{ partial "copy-value.html" (dict "page" $page "copy" $copy "keys" (slice "switches")) }}</td>
+            <td>{{ partial "copy-value.html" (dict "page" $page "copy" $copy "keys" (slice "status")) }}</td>
+            <td>{{ partial "inline-value.html" (index $copy "notes") }}</td>
+          </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </div>
+</section>
+{{ end }}
+
+{{ partial "kits.html" . }}
+{{ partial "keycap-parts.html" . }}

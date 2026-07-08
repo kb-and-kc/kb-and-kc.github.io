@@ -1,0 +1,16 @@
+{{ define "main" }}
+<section class="page-head">
+  <p class="eyebrow">{{ humanize .Data.Singular }}</p>
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div class="intro">{{ . }}</div>{{ end }}
+</section>
+
+{{ partial "filter-toolbar.html" . }}
+<div class="card-grid" data-filter-list>
+  {{ range .Pages.ByTitle }}
+    {{ partial "card.html" . }}
+  {{ else }}
+    <p>No items found for this term.</p>
+  {{ end }}
+</div>
+{{ end }}

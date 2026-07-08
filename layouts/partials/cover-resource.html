@@ -1,0 +1,9 @@
+{{ $cover := false }}
+{{ with .Resources.GetMatch "cover.*" }}
+  {{ $cover = . }}
+{{ else }}
+  {{ range first 1 (.Resources.ByType "image") }}
+    {{ $cover = . }}
+  {{ end }}
+{{ end }}
+{{ return $cover }}

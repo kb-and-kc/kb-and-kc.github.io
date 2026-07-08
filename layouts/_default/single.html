@@ -1,0 +1,54 @@
+{{ define "main" }}
+<article class="single">
+  <header class="detail-hero">
+    <div>
+      <p class="eyebrow">{{ humanize .Section }}</p>
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+      {{ partial "chips.html" . }}
+    </div>
+    {{ $cover := partial "cover-resource.html" . }}
+    {{ with $cover }}
+      <a class="hero-cover" href="{{ .RelPermalink }}" data-lightbox data-lightbox-caption="Cover photo for {{ $.Title }}">
+        <img src="{{ .RelPermalink }}" alt="Cover photo for {{ $.Title }}" loading="eager">
+      </a>
+    {{ else }}
+      <div class="hero-cover placeholder-cover">No cover yet</div>
+    {{ end }}
+  </header>
+
+  {{ partial "metadata.html" . }}
+
+  {{ with .Content }}
+    <section class="prose">{{ . }}</section>
+  {{ end }}
+
+  <section class="section-block" id="gallery">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Photos</p>
+        <h2>Gallery</h2>
+      </div>
+    </div>
+    {{ $images := .Resources.ByType "image" }}
+    {{ if $images }}
+      <div class="gallery-grid">
+        {{ range $images }}
+          <figure>
+            <a href="{{ .RelPermalink }}" data-lightbox data-lightbox-caption="{{ $.Title }} — {{ replaceRE "[-_]+" " " (path.BaseName .Name) | humanize }}">
+              <img src="{{ .RelPermalink }}" alt="{{ $.Title }} — {{ .Name }}" loading="lazy">
+            </a>
+            <figcaption>{{ replaceRE "[-_]+" " " (path.BaseName .Name) | humanize }}</figcaption>
+          </figure>
+        {{ end }}
+      </div>
+    {{ else }}
+      <div class="empty-state">
+        <p>No photos yet. Add images beside this page’s <code>index.md</code>.</p>
+      </div>
+    {{ end }}
+  </section>
+
+  {{ partial "related.html" . }}
+</article>
+{{ end }}

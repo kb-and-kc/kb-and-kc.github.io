@@ -1,0 +1,35 @@
+{{ $related := slice }}
+
+{{ if eq .Section "keyboards" }}
+  {{ $terms := .Params.boards | default (slice) }}
+  {{ range where site.RegularPages "Section" "combinations" }}
+    {{ if gt (len (intersect (.Params.boards | default (slice)) $terms)) 0 }}{{ $related = $related | append . }}{{ end }}
+  {{ end }}
+{{ else if eq .Section "keycaps" }}
+  {{ $terms := .Params.keycapsets | default (slice) }}
+  {{ range where site.RegularPages "Section" "combinations" }}
+    {{ if gt (len (intersect (.Params.keycapsets | default (slice)) $terms)) 0 }}{{ $related = $related | append . }}{{ end }}
+  {{ end }}
+{{ else if eq .Section "combinations" }}
+  {{ $boards := .Params.boards | default (slice) }}
+  {{ $sets := .Params.keycapsets | default (slice) }}
+  {{ range where site.RegularPages "Section" "combinations" }}
+    {{ if and (ne .RelPermalink $.RelPermalink) (or (gt (len (intersect (.Params.boards | default (slice)) $boards)) 0) (gt (len (intersect (.Params.keycapsets | default (slice)) $sets)) 0)) }}
+      {{ $related = $related | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if $related }}
+<section class="section-block">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Related</p>
+      <h2>Similar entries</h2>
+    </div>
+  </div>
+  <div class="card-grid small">
+    {{ range first 4 $related }}{{ partial "card.html" . }}{{ end }}
+  </div>
+</section>
+{{ end }}

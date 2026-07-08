@@ -1,0 +1,21 @@
+{{- $page := .page -}}
+{{- $copy := .copy -}}
+{{- $keys := .keys -}}
+{{- $value := "" -}}
+{{- range $keys -}}
+  {{- if not $value -}}
+    {{- with (index $copy .) -}}
+      {{- $value = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if not $value -}}
+  {{- range $keys -}}
+    {{- if not $value -}}
+      {{- with (index $page.Params .) -}}
+        {{- $value = . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- partial "inline-value.html" $value -}}

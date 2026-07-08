@@ -1,0 +1,12 @@
+<div class="chip-row">
+  {{ range (.Params.boards | default (slice)) }}<a class="chip" href="{{ printf "boards/%s/" (urlize .) | relURL }}">{{ . }}</a>{{ end }}
+  {{ range (.Params.keycapsets | default (slice)) }}<a class="chip" href="{{ printf "keycapsets/%s/" (urlize .) | relURL }}">{{ . }}</a>{{ end }}
+  {{ range (partial "param-list.html" (dict "page" . "keys" (slice "designers" "designer"))) }}<a class="chip" href="{{ printf "designers/%s/" (urlize .) | relURL }}">{{ . }}</a>{{ end }}
+  {{ range (.Params.profiles | default (slice)) }}<a class="chip" href="{{ printf "profiles/%s/" (urlize .) | relURL }}">{{ . }}</a>{{ end }}
+  {{ range (partial "param-list.html" (dict "page" . "keys" (slice "form_factor" "form_factors"))) }}<a class="chip" href="{{ printf "form_factor/%s/" (urlize .) | relURL }}">{{ . }}</a>{{ end }}
+  {{ range (partial "param-list.html" (dict "page" . "keys" (slice "layout_style" "layout_styles" "keyboard_layout" "case_layout" "blocker_layout"))) }}<a class="chip" href="{{ printf "layout_style/%s/" (urlize .) | relURL }}">{{ . }}</a>{{ end }}
+  {{ range (.Params.layouts | default (slice)) }}<a class="chip" href="{{ printf "layouts/%s/" (urlize .) | relURL }}">{{ . }}</a>{{ end }}
+  {{ range (.Params.switches | default (slice)) }}<a class="chip" href="{{ printf "switches/%s/" (urlize .) | relURL }}">{{ . }}</a>{{ end }}
+  {{ range (.Params.colorways | default (slice)) }}<a class="chip" href="{{ printf "colorways/%s/" (urlize .) | relURL }}">{{ . }}</a>{{ end }}
+  {{ range (.Params.tags | default (slice)) }}<a class="chip muted" href="{{ printf "tags/%s/" (urlize .) | relURL }}">#{{ . }}</a>{{ end }}
+</div>

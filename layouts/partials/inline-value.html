@@ -1,0 +1,14 @@
+{{- $value := . -}}
+{{- if $value -}}
+  {{- $items := slice -}}
+  {{- if reflect.IsSlice $value -}}
+    {{- range $value -}}
+      {{- if . -}}{{- $items = $items | append . -}}{{- end -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $items = $items | append $value -}}
+  {{- end -}}
+  {{- if gt (len $items) 0 -}}{{- delimit $items ", " -}}{{- else -}}—{{- end -}}
+{{- else -}}
+  —
+{{- end -}}

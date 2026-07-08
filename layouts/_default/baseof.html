@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="{{ site.Language.LanguageCode }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+  <link rel="stylesheet" href="{{ "css/site.css" | relURL }}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ site.Title }} home">
+        <span class="brand-mark">⌨</span>
+        <span>{{ site.Title }}</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        {{ range site.Menus.main }}
+          <a href="{{ .URL | relURL }}">{{ .Name }}</a>
+        {{ end }}
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap main">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer class="site-footer wrap">
+    <p>Local-first keyboard catalogue. {{ site.Params.photoHint }}</p>
+  </footer>
+  <script src="{{ "js/filter.js" | relURL }}" defer></script>
+  <script src="{{ "js/lightbox.js" | relURL }}" defer></script>
+</body>
+</html>

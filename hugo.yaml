@@ -1,0 +1,52 @@
+baseURL: "https://kb-and-kc.github.io/"
+languageCode: "en-gb"
+title: "Keyboard & Keycap Collections"
+
+# Nice local browsing URLs. Run with: hugo server --buildDrafts
+uglyURLs: false
+
+params:
+  description: "A local catalogue for keyboards, keycap sets, designers, switches, form factors, layout styles, and photo combinations."
+  owner: "nixche"
+  photoHint: "Put photos beside each page's index.md. Name one cover.jpg/png/webp if you want it as the card image."
+
+menus:
+  main:
+    - name: "Home"
+      pageRef: "/"
+      weight: 10
+    - name: "Combinations"
+      pageRef: "/combinations"
+      weight: 20
+    - name: "Keyboards"
+      pageRef: "/keyboards"
+      weight: 30
+    - name: "Keycaps"
+      pageRef: "/keycaps"
+      weight: 40
+    - name: "Tags"
+      pageRef: "/tags"
+      weight: 50
+    - name: "Browse"
+      pageRef: "/browse"
+      weight: 60
+
+# Taxonomies become browse pages, e.g. /boards/mode-envoy/ or /profiles/cherry/.
+# Avoid naming these exactly the same as content sections to prevent URL collisions.
+taxonomies:
+  tag: "tags"
+  board: "boards"
+  keycapset: "keycapsets"
+  profile: "profiles"
+  form_factor: "form_factor"
+  layout_style: "layout_style"
+  layout: "layouts" # Legacy/backwards compatibility for older entries.
+  designer: "designers"
+  switch: "switches"
+  maker: "makers"
+  colorway: "colorways"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true

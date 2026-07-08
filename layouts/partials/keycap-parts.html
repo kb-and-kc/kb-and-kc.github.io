@@ -1,0 +1,39 @@
+{{ with .Params.keycap_parts }}
+<section class="section-block">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Build details</p>
+      <h2>Keycap mix</h2>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table class="config-table keycap-mix-table">
+      <thead>
+        <tr>
+          <th>Region</th>
+          <th>Keycap set</th>
+          <th>Kit(s)</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range . }}
+          <tr>
+            {{ if reflect.IsMap . }}
+              <td>{{ partial "inline-value.html" (index . "region") }}</td>
+              <td>{{ partial "inline-value.html" (or (index . "keycapset") (index . "set")) }}</td>
+              <td>{{ partial "inline-value.html" (or (index . "kits") (index . "kit")) }}</td>
+              <td>{{ partial "inline-value.html" (index . "notes") }}</td>
+            {{ else }}
+              <td>{{ partial "inline-value.html" . }}</td>
+              <td>—</td>
+              <td>—</td>
+              <td>—</td>
+            {{ end }}
+          </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </div>
+</section>
+{{ end }}

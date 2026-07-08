@@ -1,0 +1,20 @@
+{{ define "main" }}
+<section class="page-head">
+  <p class="eyebrow">{{ with .Section }}{{ humanize . }}{{ else }}Collection{{ end }}</p>
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div class="intro">{{ . }}</div>{{ end }}
+</section>
+
+{{ if .Pages }}
+  {{ partial "filter-toolbar.html" . }}
+  <div class="card-grid" data-filter-list>
+    {{ range .Pages.ByTitle }}
+      {{ partial "card.html" . }}
+    {{ end }}
+  </div>
+{{ else }}
+  <div class="empty-state">
+    <p>No entries here yet.</p>
+  </div>
+{{ end }}
+{{ end }}
