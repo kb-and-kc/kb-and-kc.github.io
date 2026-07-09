@@ -21,7 +21,7 @@ copies:
     plate: "Aluminium"
     pcb: "Hotswap"
     switches: ["Coke"]
-    layout_style: "WK"
+    layout_style: "WKL"
     notes: "Ore 60 WKL with hotswap PCB and aluminium plate."
   - name: "HHKB build"
     color: "Raw"
