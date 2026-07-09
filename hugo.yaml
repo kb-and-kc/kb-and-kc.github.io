@@ -8,7 +8,7 @@ uglyURLs: false
 params:
   description: "A local catalogue for keyboards, keycap sets, designers, switches, form factors, layout styles, and photo combinations."
   owner: "nixche"
-  photoHint: "Put photos beside each page's index.md. Name one cover.jpg/png/webp if you want it as the card image."
+  photoHint: "Put photos along with each page's index.md. Name one cover.jpg/png/webp if you want it as the card image."
 
 menus:
   main:

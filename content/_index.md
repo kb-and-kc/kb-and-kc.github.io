@@ -1,6 +1,6 @@
 ---
 title: "Keyboard Catalogue"
-description: "A local catalogue for your keyboard, keycap, switch, and combination photos."
+description: "A local catalogue for your keyboard, keycap, and combination photos."
 ---
 
 Track what you own, compare how different keycap sets look on the same board, and browse everything by keyboard, profile, colour, form factor, layout style, switch, maker, or free-form tags.
